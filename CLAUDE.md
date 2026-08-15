@@ -90,13 +90,16 @@ on every deploy, so the dashboard value is self-healing even if changed manually
 currently contains **only** `name` + `github.silent`. It does **not** carry the crons,
 security headers, rewrite or redirects that the root `vercel.json` defines.
 
-Consequences to be aware of (⚠️ open items, not yet resolved):
-- **The 5 crons in the root `vercel.json` do not run.** `/api/cron/{sync-leads,
-  ingest-from-sheets,sync-listings,maintenance,sync-master-sheet}` all exist as routes but
-  nothing schedules them. (`whatsapp-dispatch` and the external syncs *are* covered — by
-  `.github/workflows/whatsapp-dispatch-cron.yml` and `external-workflows.yml`.)
-  Note `sync-master-sheet` is `0 */6 * * *`, which a Vercel **Hobby** plan rejects — Hobby
-  allows daily crons only, so moving these over may require a plan upgrade or daily schedules.
+Consequences to be aware of:
+- **The 5 crons in the root `vercel.json` never ran under Vercel.** They are now scheduled
+  from GitHub Actions instead — `.github/workflows/vercel-cron-bridge.yml` calls
+  `/api/cron/{sync-leads,ingest-from-sheets,sync-listings,maintenance,sync-master-sheet}`
+  on the same schedules the root `vercel.json` declared. Actions was chosen over moving them
+  into the app's `vercel.json` because `sync-master-sheet` needs `0 */6 * * *`, which a Vercel
+  **Hobby** plan rejects (Hobby allows daily crons only) — the bridge works on any plan and
+  matches `whatsapp-dispatch-cron.yml`. It requires the `CRON_SECRET` **repo secret** to match
+  the `CRON_SECRET` env var on the Vercel project, and fails loudly if the secret is unset.
+  (`whatsapp-dispatch` and the external syncs are covered by their own workflows.)
 - Security headers are still applied — `next.config.ts` `headers()` sets the same four.
 - `git.deploymentEnabled: false` is likewise not applied from this file; confirm git
   auto-deploy is off in the Vercel dashboard so the GitHub Action stays the only deploy path.
@@ -158,16 +161,23 @@ each with its own inline dictionary, split across the component tree:
 Consolidating onto one provider is outstanding work. Until then, check which provider a
 component already uses before adding translation keys.
 
-### Homepage is served by static HTML, not the App Router (⚠️)
+### Homepage — App Router, with a static portal alongside (⚠️ read before adding rewrites)
 
-`next.config.ts` has a `beforeFiles` rewrite `/` → `/client-page/index.html`. `beforeFiles`
-runs *before* the filesystem step, so `app/page.tsx` (→ `app/ClientHome.tsx`) is **shadowed
-and never renders in production**. The `afterFiles` entries (`/compounds`, `/properties`, …)
-run *after* the filesystem step, so the real App Router routes win there instead.
+`/` is served by the **App Router** (`app/page.tsx` → `app/ClientHome.tsx`).
 
-There is also a `fallback` rewrite `/:path*` → `/client-page/:path*`, which means unmatched
-URLs return the static shell rather than a 404. Confirm this is intended before relying on
-`not-found.tsx`.
+It previously was not: a `beforeFiles` rewrite sent `/` → `/client-page/index.html`, and
+because `beforeFiles` runs *before* the filesystem step, the React homepage was shadowed and
+never rendered in production. That entry has been removed. **Do not re-add a `/` entry to
+`beforeFiles`** — it silently shadows the App Router homepage again.
+
+The static portal is unchanged and still reachable at `/client-page` (and `/index.html`).
+The `afterFiles` entries (`/compounds`, `/properties`, …) run *after* the filesystem step,
+so the real App Router routes already win there — those rewrites only apply to paths with
+no matching route.
+
+Still outstanding: the `fallback` rewrite `/:path*` → `/client-page/:path*` means unmatched
+URLs return the static shell rather than a 404, so `not-found.tsx` is effectively unreachable
+for arbitrary paths. Left as-is pending a decision.
 
 ## Obsidian Memory Engine & AI Sourcing
 
