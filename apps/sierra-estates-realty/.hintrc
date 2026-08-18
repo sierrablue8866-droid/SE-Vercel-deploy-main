@@ -28,7 +28,6 @@
   "ignoredUrls": [
     "**/public/client-page/.min/**",
     "**/.min/**",
-    "**/client-page/.min/**",
-    "**/deploy/**"
+    "**/client-page/.min/**"
   ]
 }
