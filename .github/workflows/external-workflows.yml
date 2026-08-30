@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://gist.githubusercontent.com/sargunv/c2ca41a08391cd06feaad97aece309e4/raw/empty-json-schema.json
 name: External Workflows — Sync Data with Sheets
 
 # Each job guards on its required repository secrets: when secrets are not
@@ -69,12 +70,14 @@ jobs:
         if: steps.secrets.outputs.configured == 'true'
         with:
           node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'workflows/package-lock.json'
 
       - name: Install workflow dependencies
         if: steps.secrets.outputs.configured == 'true'
         run: |
           cd workflows
-          npm install --production
+          npm ci --omit=dev
 
       - name: Run Owner Search
         if: steps.secrets.outputs.configured == 'true'
@@ -129,12 +132,14 @@ jobs:
         if: steps.secrets.outputs.configured == 'true'
         with:
           node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'workflows/package-lock.json'
 
       - name: Install workflow dependencies
         if: steps.secrets.outputs.configured == 'true'
         run: |
           cd workflows
-          npm install --production
+          npm ci --omit=dev
 
       - name: Run Owner Contact
         if: steps.secrets.outputs.configured == 'true'
@@ -185,12 +190,14 @@ jobs:
         if: steps.secrets.outputs.configured == 'true'
         with:
           node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'workflows/package-lock.json'
 
       - name: Install workflow dependencies
         if: steps.secrets.outputs.configured == 'true'
         run: |
           cd workflows
-          npm install --production
+          npm ci --omit=dev
 
       - name: Run Email Sender
         if: steps.secrets.outputs.configured == 'true'
@@ -241,12 +248,14 @@ jobs:
         if: steps.secrets.outputs.configured == 'true'
         with:
           node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'workflows/package-lock.json'
 
       - name: Install workflow dependencies
         if: steps.secrets.outputs.configured == 'true'
         run: |
           cd workflows
-          npm install --production
+          npm ci --omit=dev
 
       - name: Run Unit Adder
         if: steps.secrets.outputs.configured == 'true'
