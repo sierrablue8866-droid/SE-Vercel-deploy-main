@@ -55,7 +55,7 @@ describe('Production & Deployment Architecture Tests', () => {
   describe('2. Supabase Integration & Data Contract', () => {
     it('initializes Supabase client with valid project URL', () => {
       expect(supabase).toBeDefined();
-      expect(supabase.supabaseUrl).toContain('gaxfqcietzoonlmatiot.supabase.co');
+      expect((supabase as any).supabaseUrl).toContain('gaxfqcietzoonlmatiot.supabase.co');
     });
 
     it('has search_properties RPC callable schema', () => {
