@@ -53,9 +53,18 @@ const VARIABLES = {
   TWILIO_MESSAGING_SERVICE_SID: 'MG1234567890abcdef1234567890abcdef',
   AI_PROVIDER: 'gemini',
   WHATSAPP_API_URL: 'https://y2ldihfwkuf742wj7i5pfa3ntu0nscsc.lambda-url.us-east-1.on.aws',
+  SUPABASE_URL: 'https://gaxfqcietzoonlmatiot.supabase.co',
+  NEXT_PUBLIC_SUPABASE_URL: 'https://gaxfqcietzoonlmatiot.supabase.co',
+  ADMIN_BOOTSTRAP_EMAIL: 'admin@sierra-estates.net',
+  ADMIN_EMAILS: 'admin@sierra-estates.net,sierrablue8866@gmail.com,a.fawzy8866@gmail.com',
 };
 
 const SECRETS = {
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdheGZxY2lldHpvb25sbWF0aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgxNjI3ODAsImV4cCI6MjEwMzczODc4MH0.Eb43G38s9ODOAkR2Nextp4mtVAa_XTyqJ8nQWgwCsnk',
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdheGZxY2lldHpvb25sbWF0aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgxNjI3ODAsImV4cCI6MjEwMzczODc4MH0.Eb43G38s9ODOAkR2Nextp4mtVAa_XTyqJ8nQWgwCsnk',
+  SUPABASE_SERVICE_ROLE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdheGZxY2lldHpvb25sbWF0aW90Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODE2Mjc4MCwiZXhwIjoyMTAzNzM4NzgwfQ.ukozv2PCv5K8tCRkaee5S2fP8QZkzEkVLCXsPHEEyyc',
+  SUPABASE_SERVICE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdheGZxY2lldHpvb25sbWF0aW90Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODE2Mjc4MCwiZXhwIjoyMTAzNzM4NzgwfQ.ukozv2PCv5K8tCRkaee5S2fP8QZkzEkVLCXsPHEEyyc',
+  ADMIN_BOOTSTRAP_PASSWORD: 'AdminSierra2026!',
   SESSION_SECRET: '94ef563c5579cca4cb743ec78b3b939fc2861b07b2c04bcffed53282cb73510c',
   SBR_SECRET_KEY: 'sierra-secure-2028',
   ADMIN_API_KEY: 'ba5eb17b8cd715e93d87d4d55b8fc021b4817c155c465a082cb24600b27bb25c',
