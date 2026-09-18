@@ -8,7 +8,7 @@ describe("Supabase Storage & Vercel Resilience Suite", () => {
       "https://gaxfqcietzoonlmatiot.supabase.co";
     process.env.SUPABASE_SERVICE_ROLE_KEY =
       process.env.SUPABASE_SERVICE_ROLE_KEY ||
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdheGZxY2lldHpvb25sbWF0aW90Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODE2Mjc4MCwiZXhwIjoyMTAzNzM4NzgwfQ.ukozv2PCv5K8tCRkaee5S2fP8QZkzEkVLCXsPHEEyyc";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdheGZxY2lldHpvb25sbWF0aW90Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODE2Mjc4MCwiZXhwIjoyMTAzNzM4NzgwfQ.ukozv2PCv5K8tCRkaee5S2fP8QZkzEkVLCXsPHEEyyc"; // cspell:disable-line
     process.env.SUPABASE_PROPERTY_MEDIA_BUCKET = "property-media";
   });
 
